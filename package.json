@@ -1,0 +1,34 @@
+{
+  "name": "recotw-stub",
+  "version": "1.0.0",
+  "description": "A backward-compatible stub server for RecoTw API.",
+  "dependencies": {
+    "@koa/router": "^9.0.0",
+    "koa": "^2.11.0",
+    "koa-logger": "^3.2.1",
+    "koa-send": "^5.0.0",
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.11.3",
+    "@types/koa-logger": "^3.1.1",
+    "@types/koa-send": "^4.1.2",
+    "@types/koa__router": "^8.0.2",
+    "@types/node-fetch": "^2.5.6",
+    "typescript": "^3.8.3"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RecoTwExplorer/RecoTwStub.git"
+  },
+  "author": "Chitoku",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RecoTwExplorer/RecoTwStub/issues"
+  },
+  "homepage": "https://github.com/RecoTwExplorer/RecoTwStub"
+}
