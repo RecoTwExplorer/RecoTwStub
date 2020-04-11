@@ -19,7 +19,7 @@ router.get("/recotw/1/tweet/get_tweet_all", (ctx, next) => {
         return;
     }
 
-    return send(ctx, "all_tweets.json");
+    send(ctx, "all_tweets.json");
 });
 
 router.get("/icon/:screen_name", async (ctx, next) => {
@@ -29,7 +29,7 @@ router.get("/icon/:screen_name", async (ctx, next) => {
         if (!response.ok) {
             throw new Error(response.statusText);
         }
-        const [ , result ] = /src=(?:"|')(https:\/\/[ap]bs\.twimg\.com\/[^"']+)/.exec(await response.text()) || [];
+        const [ , result ] = /src=(?:"|')(https:\/\/[ap]bs\.twimg\.com\/[^"']+)/u.exec(await response.text()) ?? [];
         if (!result) {
             ctx.status = 500;
             return;
@@ -43,7 +43,7 @@ router.get("/icon/:screen_name", async (ctx, next) => {
 const server = app
     .use(logger())
     .use(router.routes())
-    .listen(process.env.PORT || "8080");
+    .listen(process.env.PORT ?? "8080");
 
 process
     .on("SIGINT", () => server.close(() => process.exit()))
