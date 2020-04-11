@@ -1,6 +1,7 @@
 Dockerfile
 LICENSE
 README
+data
 dist
 node_modules
 .git

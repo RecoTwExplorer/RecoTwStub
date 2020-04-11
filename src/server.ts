@@ -19,7 +19,7 @@ router.get("/recotw/1/tweet/get_tweet_all", async (ctx, next) => {
         return;
     }
 
-    return send(ctx, "all_tweets.json");
+    return send(ctx, "data/all_tweets.json");
 });
 
 router.get("/icon/:screen_name", async (ctx, next) => {
