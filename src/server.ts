@@ -12,14 +12,14 @@ router.get("/healthz", (ctx, next) => {
     ctx.body = "OK";
 });
 
-router.get("/recotw/1/tweet/get_tweet_all", (ctx, next) => {
+router.get("/recotw/1/tweet/get_tweet_all", async (ctx, next) => {
     const query: TweetQuery = ctx.query;
     if (query.since_id) {
         ctx.body = [];
         return;
     }
 
-    send(ctx, "all_tweets.json");
+    return send(ctx, "all_tweets.json");
 });
 
 router.get("/icon/:screen_name", async (ctx, next) => {
@@ -45,6 +45,7 @@ const server = app
     .use(router.routes())
     .listen(process.env.PORT ?? "8080");
 
+server.keepAliveTimeout = 0;
 process
     .on("SIGINT", () => server.close(() => process.exit()))
     .on("SIGTERM", () => server.close(() => process.exit()));
