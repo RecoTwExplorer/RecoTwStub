@@ -1,6 +1,6 @@
 {
   "name": "recotw-stub",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A backward-compatible stub server for RecoTw API.",
   "dependencies": {
     "@koa/router": "^8.0.8",
