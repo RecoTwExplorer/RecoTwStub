@@ -1,19 +1,25 @@
-import * as Koa from "koa";
-import * as Router from "@koa/router";
-import * as send from "koa-send";
-import * as logger from "koa-logger";
-import fetch from "node-fetch";
+import Koa from "koa";
+import Router from "@koa/router";
+import send from "koa-send";
+import logger from "koa-logger";
+import Twitter from "twitter-lite";
 import { IconParams, TweetQuery } from "./model";
 
 const app = new Koa();
 const router = new Router();
+const twitter = new Twitter({
+    consumer_key: process.env.TWITTER_CONSUMER_KEY ?? "",
+    consumer_secret: process.env.TWITTER_CONSUMER_SECRET ?? "",
+    access_token_key: process.env.TWITTER_TOKEN ?? "",
+    access_token_secret: process.env.TWITTER_TOKEN_SECRET ?? "",
+});
 
 router.get("/healthz", (ctx, next) => {
     ctx.body = "OK";
 });
 
 router.get("/recotw/1/tweet/get_tweet_all", async (ctx, next) => {
-    const query: TweetQuery = ctx.query;
+    const query = ctx.query as TweetQuery;
     if (query.since_id) {
         ctx.body = [];
         return;
@@ -24,17 +30,9 @@ router.get("/recotw/1/tweet/get_tweet_all", async (ctx, next) => {
 
 router.get("/icon/:screen_name", async (ctx, next) => {
     try {
-        const params: IconParams = ctx.params;
-        const response = await fetch(`https://twitter.com/intent/user?screen_name=${params.screen_name}`);
-        if (!response.ok) {
-            throw new Error(response.statusText);
-        }
-        const [ , result ] = /src=(?:"|')(https:\/\/[ap]bs\.twimg\.com\/[^"']+)/u.exec(await response.text()) ?? [];
-        if (!result) {
-            ctx.status = 500;
-            return;
-        }
-        ctx.redirect(result);
+        const params = ctx.params as IconParams;
+        const response = await twitter.get<TwitterUser>("users/show", { screen_name: params.screen_name });
+        ctx.redirect(response.profile_image_url_https.replace(/_normal/u, "_200x200"));
     } catch (e) {
         ctx.redirect("https://abs.twimg.com/sticky/default_profile_images/default_profile_200x200.png");
     }
