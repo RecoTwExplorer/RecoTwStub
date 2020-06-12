@@ -108,6 +108,7 @@
           }
         }],
         "@typescript-eslint/member-ordering": "off",
+        "@typescript-eslint/naming-convention": "off",
         "@typescript-eslint/no-extra-parens": ["error", "all"],
         "@typescript-eslint/no-extraneous-class": "off",
         "@typescript-eslint/no-floating-promises": "off",
@@ -117,9 +118,6 @@
           "allowAliases": "always"
         }],
         "@typescript-eslint/no-underscore-dangle": "off",
-        "@typescript-eslint/no-unnecessary-condition": ["error", {
-          "ignoreRhs": true
-        }],
         "@typescript-eslint/no-unused-vars": "off",
         "@typescript-eslint/no-unused-vars-experimental": "off",
         "@typescript-eslint/prefer-readonly-parameter-types": "off",
