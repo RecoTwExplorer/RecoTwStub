@@ -3,6 +3,7 @@ LICENSE
 README
 data
 dist
+docker-compose.yml
 node_modules
 .git
 .github
