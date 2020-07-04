@@ -11,6 +11,14 @@ RecoTw Explorer のスタブサーバーとして動作します。
 $ npm run build
 ```
 
+## 開発
+
+RecoTw Explorer の開発時に起動するとこのサーバーが使用されます。
+
+```bash
+$ docker-compose up -d
+```
+
 ## エンドポイント
 
 ### RecoTw API
