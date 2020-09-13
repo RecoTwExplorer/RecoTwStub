@@ -1,4 +1,4 @@
-FROM node:13.12.0-alpine AS build
+FROM node:14.10.1-alpine AS build
 ENV PORT 8080
 WORKDIR /app
 COPY . /app
