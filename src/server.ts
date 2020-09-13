@@ -3,7 +3,7 @@ import Router from "@koa/router";
 import send from "koa-send";
 import logger from "koa-logger";
 import Twitter from "twitter-lite";
-import { IconParams, TweetQuery } from "./model";
+import type { IconParams, TweetQuery } from "./model";
 
 const app = new Koa();
 const router = new Router();
@@ -33,7 +33,7 @@ router.get("/icon/:screen_name", async (ctx, next) => {
         const params = ctx.params as IconParams;
         const response = await twitter.get<TwitterUser>("users/show", { screen_name: params.screen_name });
         ctx.redirect(response.profile_image_url_https.replace(/_normal/u, "_200x200"));
-    } catch (e) {
+    } catch (e: unknown) {
         ctx.redirect("https://abs.twimg.com/sticky/default_profile_images/default_profile_200x200.png");
     }
 });
